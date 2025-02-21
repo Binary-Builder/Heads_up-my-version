@@ -45,3 +45,26 @@ stopButton.addEventListener('click', () => {
     mediaRecorder.stop();
     stopButton.disabled = true;
 });
+// Request permission for motion sensors (needed for iOS 13+ and some Androids)
+if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission()
+        .then(permissionState => {
+            if (permissionState === "granted") {
+                console.log("Motion access granted!");
+            }
+        })
+        .catch(console.error);
+}
+async function requestCameraAccess() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById('videoElement').srcObject = stream;
+        console.log("Camera access granted!");
+    } catch (error) {
+        console.error("Camera access denied:", error);
+        alert("Please enable camera access in browser settings.");
+    }
+}
+
+// Call this function when the game starts
+requestCameraAccess();
