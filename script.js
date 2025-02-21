@@ -4,7 +4,7 @@ const stopButton = document.getElementById('stop-game');
 const videoElement = document.getElementById('camera');
 const downloadLink = document.getElementById('download');
 let currentWord = '';
-const words = ['Elephant', 'Dancing', 'Superman', 'Basketball', 'Singing'];
+const words = ['Squirrel', 'DDLJ', 'Superman', 'Basketball', 'kARAOKE'];
 let wordIndex = 0;
 function getNextWord() {
     if (wordIndex >= words.length) {
