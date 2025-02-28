@@ -7,7 +7,7 @@ const themeSelect = document.getElementById('theme');
 const themes = {
     animals: ["Lion", "Tiger", "Elephant", "Giraffe", "Zebra"],
     actions: ["Jumping", "Running", "Dancing", "Singing", "Swimming"],
-    bollywood: ["Sholay", "Dhoom", "Kabir Singh", "Dilwale", "Krrish"]
+    bollywood: ["Sholay", "Dhoom", "3 Idiots", "Dilwale", "DDLJ"]
 };
 
 let selectedTheme = "animals"; // Default theme
