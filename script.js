@@ -11,17 +11,27 @@ const themes = {
 };
 
 let selectedTheme = "animals"; // Default theme
-let words = themes[selectedTheme];
+let words = [];
 let wordIndex = 0;
 let gameActive = false;
 let mediaRecorder;
 let recordedChunks = [];
 let stream;
 
+// Fisher-Yates Shuffle Algorithm
+function shuffleArray(array) {
+    let shuffled = [...array]; // Copy the array to avoid modifying the original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Pick a random index
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
+}
+
 // Handle theme selection
 themeSelect.addEventListener("change", function () {
     selectedTheme = this.value;
-    words = themes[selectedTheme];
+    words = shuffleArray(themes[selectedTheme]); // Shuffle words when theme is changed
     wordIndex = 0;
 });
 
@@ -49,9 +59,10 @@ window.addEventListener("deviceorientation", (event) => {
 // Function to start the game
 startButton.addEventListener("click", async function () {
     if (gameActive) return;
-    
+
     gameActive = true;
     wordIndex = 0;
+    words = shuffleArray(themes[selectedTheme]); // Shuffle before starting
     getNextWord();
 
     // Start camera
@@ -90,7 +101,7 @@ function startRecording(stream) {
 function stopGame() {
     gameActive = false;
     wordDisplay.textContent = "Game Over!";
-    
+
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
     }
